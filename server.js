@@ -5,28 +5,54 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articleOne = {
-    title: "Article-One | Food",
-    heading:  "Article-One",
-    date: "Sep 03, 2017",
-    content: `<p>In this article, we are going to talk about various types of foods. In India, people give much importance to the food. There are so many varities of food available in India. The north indian dishes are different from the south indian dishes</p>
-                <p>Wheat is the primary food of North India. Some of the popular north indian dishes are:</p>
-                 <ol>
-                     <li>Roti</li>
-                     <li>Phulka</li>
-                     <li>Poha</li>
-                     <li>Dhaal</li>
-                     <li>Aloo sabji</li>
-                 </ol>
-                
-                <p>Rice is the primary food of South India. Some of the popular north indian dishes are:</p>
-                 <ol>
-                     <li>Rice</li>
-                     <li>Sambhar</li>
-                     <li>Idly</li>
-                     <li>Dosa</li>
-                     <li>Vegetable Curries</li>
-                 </ol>`
+var articles = {
+    articleOne: {
+        title: "Article-One | Food",
+        heading:  "Article-One",
+        date: "Sep 03, 2017",
+        content: `<p>In this article, we are going to talk about various types of foods. In India, people give much importance to the food. There are so many varities of food available in India. The north indian dishes are different from the south indian dishes</p>
+                    <p>Wheat is the primary food of North India. Some of the popular north indian dishes are:</p>
+                     <ol>
+                         <li>Roti</li>
+                         <li>Phulka</li>
+                         <li>Poha</li>
+                         <li>Dhaal</li>
+                         <li>Aloo sabji</li>
+                     </ol>
+                    
+                    <p>Rice is the primary food of South India. Some of the popular north indian dishes are:</p>
+                     <ol>
+                         <li>Rice</li>
+                         <li>Sambhar</li>
+                         <li>Idly</li>
+                         <li>Dosa</li>
+                         <li>Vegetable Curries</li>
+                     </ol>`
+    },
+    articleTwo: {
+        title: "Article-Two | Travel",
+        heading:  "Article-Two",
+        date: "Sep 04, 2017",
+        content: `<p>In this article, we are going to talk about different places to visit in India. Some of the key places to visit in India are 
+                Taj Mahal (Agra), Aksharadham Temple (Delhi), Gateway of India (Mumbai), Howrah Bridge (Kolkata), Brindavan Garden (Bangalore), 
+                Meenakshi Amman Temple (Madurai) and so on
+                </p>`
+    },
+    articleThree: {
+        title: "Article-Three | Languages",
+        heading:  "Article-Three",
+        date: "Sep 05, 2017",
+        content: `<p>In this article, we are going to talk about different languages spoken in India. Some of the languages are: </p>
+                <ol>
+                <li>Hindi</li>
+                <li>Tamil</li>
+                <li>Telugu</li>
+                <li>Kannada</li>
+                <li>Malayalam</li>
+                <li>Gujarati</li>
+                <li>Sanskrit</li>
+                </ol>`  
+    }
 };
 
 function createTemplate(data){
@@ -72,8 +98,8 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-app.get('/article-one', function (req, res) {
-    res.send(createTemplate(articleOne));
+app.get('/:articleName', function (req, res) {
+    res.send(createTemplate(articles[articleName]));
   // res.sendFile(path.join(__dirname, 'ui', 'Article-one.html'));
 });
 
