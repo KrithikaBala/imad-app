@@ -6,7 +6,7 @@ var app = express();
 app.use(morgan('combined'));
 
 var articles = {
-    articleOne: {
+    'article-one': {
         title: "Article-One | Food",
         heading:  "Article-One",
         date: "Sep 03, 2017",
@@ -29,7 +29,7 @@ var articles = {
                          <li>Vegetable Curries</li>
                      </ol>`
     },
-    articleTwo: {
+    'article-two': {
         title: "Article-Two | Travel",
         heading:  "Article-Two",
         date: "Sep 04, 2017",
@@ -38,7 +38,7 @@ var articles = {
                 Meenakshi Amman Temple (Madurai) and so on
                 </p>`
     },
-    articleThree: {
+    'article-three': {
         title: "Article-Three | Languages",
         heading:  "Article-Three",
         date: "Sep 05, 2017",
@@ -99,6 +99,7 @@ app.get('/', function (req, res) {
 });
 
 app.get('/:articleName', function (req, res) {
+    var articleName = req.params.articleName;
     res.send(createTemplate(articles[articleName]));
   // res.sendFile(path.join(__dirname, 'ui', 'Article-one.html'));
 });
