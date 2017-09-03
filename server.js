@@ -5,12 +5,76 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var articleOne = {
+    title: "Article-One | Food",
+    heading:  "Article-One",
+    date: "Sep 03, 2017",
+    content: `<p>In this article, we are going to talk about various types of foods. In India, people give much importance to the food. There are so many varities of food available in India. The north indian dishes are different from the south indian dishes</p>
+                <p>Wheat is the primary food of North India. Some of the popular north indian dishes are:</p>
+                 <ol>
+                     <li>Roti</li>
+                     <li>Phulka</li>
+                     <li>Poha</li>
+                     <li>Dhaal</li>
+                     <li>Aloo sabji</li>
+                 </ol>
+                
+                <p>Rice is the primary food of South India. Some of the popular north indian dishes are:</p>
+                 <ol>
+                     <li>Rice</li>
+                     <li>Sambhar</li>
+                     <li>Idly</li>
+                     <li>Dosa</li>
+                     <li>Vegetable Curries</li>
+                 </ol>`
+};
+
+function createTemple(data){
+    var title = data.title;
+    var heading = data.heading;
+    var date = data.date;
+    var content = data.content;
+    
+    var htmlTemplate = `
+            <html>
+                <head>
+                    <title>
+                        ${title}
+                    </title>
+                    <meta name="viewport" content="width=device-width, initial-scale=1" />
+                    <link href="/ui/style.css" rel="stylesheet" />
+                </head>
+                <body>
+                    <div class = "container">
+                        <div>
+                            <a href="/">Home</a>
+                        </div>
+                        <hr/>
+                        <h3>
+                            ${heading}
+                        </h3>
+                        <div>
+                            ${date}
+                        </div>
+                        <div>
+                            ${content}
+                        </div>
+                    </div>
+                </body>
+            </html>
+            `;
+    
+    return htmlTemplate;
+}
+
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
 app.get('/article-one', function (req, res) {
-   res.sendFile(path.join(__dirname, 'ui', 'Article-one.html'));
+    res.send(createTemplate(articleOne));
+  // res.sendFile(path.join(__dirname, 'ui', 'Article-one.html'));
 });
 
 app.get('/article-two', function (req, res) {
