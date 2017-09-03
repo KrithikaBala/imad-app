@@ -29,7 +29,7 @@ var articleOne = {
                  </ol>`
 };
 
-function createTemple(data){
+function createTemplate(data){
     var title = data.title;
     var heading = data.heading;
     var date = data.date;
