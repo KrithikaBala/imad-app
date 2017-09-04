@@ -81,14 +81,14 @@ comments_btn.onclick = function(){
                     comlist += '<li>' + comments[i] + '</li>';
                 }
                 
-                namesList = document.getElementById("commentslist");
-                namesList.innerHTML = comlist;
+                var commentsList = document.getElementById("commentslist");
+                commentsList.innerHTML = comlist;
             }
         }
     };
    
    //make the request
    var commentsText = document.getElementById("comments").value;
-   request.open('GET', 'http://abikirthi.imad.hasura-app.io/submit-comments?name=' +commentsText, true);
+   request.open('GET', 'http://abikirthi.imad.hasura-app.io/article/submit-comments?name=' +commentsText, true);
    request.send(null)  
 };
