@@ -34,3 +34,32 @@ button.onclick = function(){
    request.send(null)
     
 };
+
+var submit_btn = document.getElementById("submit");
+submit_btn.onclick = function(){
+      //create the request
+    var request = new XMLHttpRequest();
+    
+    //capture the response and store it in a variable
+    request.onreadystatechange = function(){
+        if(request.readyState == XMLHttpRequest.DONE){
+            //take some action
+            if(request.status == 200){
+                var names = request.responseText;
+                names = JSON.parse(names);
+                var list = '';
+                for(var i=0;i<names.length;i++){
+                    list += '<li>' + names[i] + '</li>';
+                }
+                
+                namesList = document.getElementById("namelist");
+                namesList.innerHTML = list;
+            }
+        }
+    };
+   
+   //make the request
+   var name = document.getElementById("name").value;
+   request.open('GET', 'http://abikirthi.imad.hasura-app.io/submit-name?name=' +name, true);
+   request.send(null)  
+};
