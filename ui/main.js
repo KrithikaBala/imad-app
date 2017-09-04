@@ -63,3 +63,32 @@ submit_btn.onclick = function(){
    request.open('GET', 'http://abikirthi.imad.hasura-app.io/submit-name?name=' +name, true);
    request.send(null)  
 };
+
+var comments_btn = document.getElementById("comments_btn");
+comments_btn.onclick = function(){
+      //create the request
+    var request = new XMLHttpRequest();
+    
+    //capture the response and store it in a variable
+    request.onreadystatechange = function(){
+        if(request.readyState == XMLHttpRequest.DONE){
+            //take some action
+            if(request.status == 200){
+                var comments = request.responseText;
+                comments = JSON.parse(comments);
+                var comlist = '';
+                for(var i=0;i<comments.length;i++){
+                    list += '<li>' + comments[i] + '</li>';
+                }
+                
+                namesList = document.getElementById("commentslist");
+                namesList.innerHTML = list;
+            }
+        }
+    };
+   
+   //make the request
+   var comments = document.getElementById("comments").value;
+   request.open('GET', 'http://abikirthi.imad.hasura-app.io/submit-comments?comments=' +comments, true);
+   request.send(null)  
+};
