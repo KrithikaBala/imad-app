@@ -115,6 +115,13 @@ app.get('/submit-name', function (req, res) {
   res.send(JSON.stringify(names));
 });
 
+var commentslist = []
+app.get('/submit-comments', function (req, res) {
+  var comment = req.query.name;
+  commentslist.push(comment);
+  res.send(JSON.stringify(commentslist));
+});
+
 app.get('/article', function (req, res) {
     //var articleName = req.params.articleName;
     //res.send(createTemplate(articles[articleName]));
