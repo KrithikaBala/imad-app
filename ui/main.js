@@ -66,6 +66,7 @@ submit_btn.onclick = function(){
 
 var comments_btn = document.getElementById("comments_btn");
 comments_btn.onclick = function(){
+    alert("hi");
       //create the request
     var request1 = new XMLHttpRequest();
     
