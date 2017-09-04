@@ -1,3 +1,4 @@
+console.log('Article JS loaded!');
 var comments_btn = document.getElementById("comments_btn");
 comments_btn.onclick = function(){
     alert("hi");
