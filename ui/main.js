@@ -67,14 +67,14 @@ submit_btn.onclick = function(){
 var comments_btn = document.getElementById("comments_btn");
 comments_btn.onclick = function(){
       //create the request
-    var request = new XMLHttpRequest();
+    var request1 = new XMLHttpRequest();
     
     //capture the response and store it in a variable
-    request.onreadystatechange = function(){
-        if(request.readyState == XMLHttpRequest.DONE){
+    request1.onreadystatechange = function(){
+        if(request1.readyState == XMLHttpRequest.DONE){
             //take some action
-            if(request.status == 200){
-                var comments = request.responseText;
+            if(request1.status == 200){
+                var comments = request1.responseText;
                 comments = JSON.parse(comments);
                 var comlist = '';
                 for(var i=0;i<comments.length;i++){
@@ -89,6 +89,7 @@ comments_btn.onclick = function(){
    
    //make the request
    var commentsText = document.getElementById("comments").value;
-   request.open('GET', 'http://abikirthi.imad.hasura-app.io/article/submit-comments?name=' +commentsText, true);
-   request.send(null)  
+   alert(commentsText);
+   request1.open('GET', 'http://abikirthi.imad.hasura-app.io/article/submit-comments?name=' +commentsText, true);
+   request1.send(null)  
 };
