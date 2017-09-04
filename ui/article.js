@@ -1,7 +1,6 @@
 console.log('Article JS loaded!');
 var comments_btn = document.getElementById("comments_btn");
 comments_btn.onclick = function(){
-    alert("hi");
       //create the request
     var request1 = new XMLHttpRequest();
     
@@ -25,7 +24,7 @@ comments_btn.onclick = function(){
    
    //make the request
    var commentsText = document.getElementById("comments").value;
-   alert(commentsText);
    request1.open('GET', 'http://abikirthi.imad.hasura-app.io/article/submit-comments?name=' +commentsText, true);
-   request1.send(null)  
+   request1.send(null)
+   document.getElementById("comments").value = '';
 };
