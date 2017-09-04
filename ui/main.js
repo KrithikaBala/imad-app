@@ -88,7 +88,7 @@ comments_btn.onclick = function(){
     };
    
    //make the request
-   var comments = document.getElementById("comments").value;
-   request.open('GET', 'http://abikirthi.imad.hasura-app.io/submit-comments?comments=' +comments, true);
+   var commentsText = document.getElementById("comments").value;
+   request.open('GET', 'http://abikirthi.imad.hasura-app.io/submit-comments?comments=' +commentsText, true);
    request.send(null)  
 };
