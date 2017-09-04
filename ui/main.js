@@ -89,6 +89,6 @@ comments_btn.onclick = function(){
    
    //make the request
    var commentsText = document.getElementById("comments").value;
-   request.open('GET', 'http://abikirthi.imad.hasura-app.io/submit-comments?comments=' +commentsText, true);
+   request.open('GET', 'http://abikirthi.imad.hasura-app.io/submit-comments?name=' +commentsText, true);
    request.send(null)  
 };
