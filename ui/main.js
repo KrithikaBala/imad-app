@@ -78,11 +78,11 @@ comments_btn.onclick = function(){
                 comments = JSON.parse(comments);
                 var comlist = '';
                 for(var i=0;i<comments.length;i++){
-                    list += '<li>' + comments[i] + '</li>';
+                    comlist += '<li>' + comments[i] + '</li>';
                 }
                 
                 namesList = document.getElementById("commentslist");
-                namesList.innerHTML = list;
+                namesList.innerHTML = comlist;
             }
         }
     };
