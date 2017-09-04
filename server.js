@@ -119,7 +119,7 @@ app.get('/counter', function (req, res) {
 
 var Pool = new Pool(config);
 app.get('/test-db', function (req, res) {
-    Pool.query("SELECT * FROM test-db", function(err, result){
+    Pool.query("SELECT * FROM test_db", function(err, result){
         if(err){
             res.status(500).send(err.toString());
         }else{
