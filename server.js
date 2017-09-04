@@ -162,7 +162,7 @@ app.get('/articles/:articleName', function (req, res) {
                 res.send(createTemplate(articleData));
             }
         }
-    })
+    });
     //res.send(createTemplate(articles[articleName]));
   // res.sendFile(path.join(__dirname, 'ui', 'Article-one.html'));
 });
