@@ -20,6 +20,11 @@ body {
     height: 200px;
 }
 
+.img-small{
+    height:50px;
+    width:50px;
+}
+
 .container {
     max-width: 800px;
     margin: 0 auto;
