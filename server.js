@@ -116,7 +116,7 @@ app.get('/submit-name', function (req, res) {
 });
 
 var commentslist = []
-app.get('/submit-comments', function (req, res) {
+app.get('/article/submit-comments', function (req, res) {
   var comment = req.query.name;
   commentslist.push(comment);
   res.send(JSON.stringify(commentslist));
