@@ -38,8 +38,10 @@ register_btn.onclick = function(){
             if(request.status == 200){
                 console.log("User registered successfully!!!");
                 alert("User registered successfully!!!");
+                document.getElementById("username").value = '';
+                document.getElementById("password").value = '';
             }else if(request.status == 403){
-                alert("username/password is invalid");
+                alert("forbidden");
             }else if(request.status == 500){
                 alert("something went wrong in the server");
             }
