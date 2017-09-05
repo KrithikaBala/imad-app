@@ -3,6 +3,7 @@ var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
 var crypto = require('crypto');
+var bodyParser = require('body-parser');
 
 var config = {
     user: "abikirthi",
@@ -14,6 +15,7 @@ var config = {
 
 var app = express();
 app.use(morgan('combined'));
+app.use(bodyParser.json())
 
 var articles = {
     'article-one': {
@@ -120,7 +122,7 @@ app.get('/counter', function (req, res) {
 
 function hash(input, salt){
     var hashed = crypto.pbkdf2Sync(input, salt, 10000, 512, 'sha512');
-    return hashed.toString('hex');
+    return ['pbkdf2', '10000', salt, hashed.toString('hex')].join('$');
 }
 
 app.get('/hash/:input', function (req, res) {
@@ -139,6 +141,47 @@ app.get('/test-db', function (req, res) {
     });
 });
 
+app.post('/create-user', function (req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    var salt = crypto.randomBytes(128).toString('hex');
+    var dbString = hash(password, salt);
+    
+    Pool.query('INSERT into "user" (username, password) values $1, $2', [username, dbString], function(err, result){
+        if(err){
+            res.status(500).send(err.toString());
+        }else{
+            res.send("User successfully created!!!" + username);
+        }
+    });
+});
+
+
+app.post('/login', function (req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+
+    Pool.query('SELECT * FROM "user" WHERE username = $1', [username], function(err, result){
+        if(err){
+            res.status(500).send(err.toString());
+        }else{
+            if(result.rows.length === 0){
+                res.status(403).send("username invalid");
+            }
+            else{
+                var dbString = result.rows[0].password;
+                var salt = dbString.split('$')[2];
+                var hashedPassword = hash(password, salt);
+                if(hashedPassword == dbString){
+                    res.send("User successfully logged in");
+                }else{
+                        res.send("Invalid Password"); 
+                }
+            }
+
+        }
+    });
+});
 
 var names = []
 app.get('/submit-name', function (req, res) {
@@ -190,6 +233,10 @@ app.get('/ui/main.js', function (req, res) {
 
 app.get('/ui/article.js', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'article.js'));
+});
+
+app.get('/ui/login.js', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'login.js'));
 });
 
 app.get('/ui/madi.png', function (req, res) {
