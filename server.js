@@ -2,6 +2,7 @@ var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
 var Pool = require('pg').Pool;
+var crypto = require('crypto');
 
 var config = {
     user: "abikirthi",
@@ -14,7 +15,7 @@ var config = {
 var app = express();
 app.use(morgan('combined'));
 
-var articles = {
+//var articles = {
     'article-one': {
         title: "Article-One | Food",
         heading:  "Article-One",
@@ -115,6 +116,16 @@ var counter = 0;
 app.get('/counter', function (req, res) {
   counter = counter + 1;
   res.send(counter.toString());
+});
+
+function hash(input, salt){
+    var hashed = crypto.pbkdf2Sync(input, salt, 10000, 512, 'sha512');
+    return hashed.toString(hex);
+}
+
+app.get('/hash/:input', function (req, res) {
+    var hashedString = hash(req.params.input, "some-random-value");
+    res.send(hashedString);
 });
 
 var Pool = new Pool(config);
