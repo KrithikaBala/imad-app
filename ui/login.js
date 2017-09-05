@@ -38,8 +38,7 @@ register_btn.onclick = function(){
             if(request.status == 200){
                 console.log("User registered successfully!!!");
                 alert("User registered successfully!!!");
-                document.getElementById("username").value = '';
-                document.getElementById("password").value = '';
+
             }else if(request.status == 403){
                 alert("forbidden");
             }else if(request.status == 500){
@@ -54,4 +53,7 @@ register_btn.onclick = function(){
    request.open('POST', 'http://abikirthi.imad.hasura-app.io/create-user', true);
    request.setRequestHeader('Content-Type', 'application/json');
    request.send(JSON.stringify({username: username, password: password}));  
+   
+   document.getElementById("username").value = '';
+   document.getElementById("password").value = '';
 };
