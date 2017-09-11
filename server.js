@@ -158,9 +158,9 @@ app.post('/create-user', function (req, res) {
     
     Pool.query('INSERT into "user" (username, password) VALUES ($1, $2)', [username, dbString], function(err, result){
         if(err){
-            res.status(500).send(err.toString());
+            res.status(500).send(JSON.stringify({error : err.toString()}));
         }else{
-            res.send("User successfully created!!!" + username);
+            res.send(JSON.stringify({message: "User successfully created!!!" + username}));
         }
     });
 });
@@ -172,10 +172,10 @@ app.post('/login', function (req, res) {
 
     Pool.query('SELECT * FROM "user" WHERE username = $1', [username], function(err, result){
         if(err){
-            res.status(500).send(err.toString());
+            res.status(500).send(JSON.stringify({error:err.toString()}));
         }else{
             if(result.rows.length === 0){
-                res.status(403).send("username invalid");
+                res.status(403).send(JSON.stringify({error:"username invalid"}));
             }
             else{
                 var dbString = result.rows[0].password;
@@ -185,9 +185,9 @@ app.post('/login', function (req, res) {
                     //set session id
                     req.session.auth = {userId: result.rows[0].id};
                     
-                    res.send("User successfully logged in");
+                    res.send(JSON.stringify({message:"User successfully logged in"}));
                 }else{
-                        res.send("Invalid Password"); 
+                        res.send(JSON.stringify({error:"Invalid Password"})); 
                 }
             }
 
