@@ -175,7 +175,7 @@ app.post('/login', function (req, res) {
             res.status(500).send(JSON.stringify({error:err.toString()}));
         }else{
             if(result.rows.length === 0){
-                res.status(403).send(JSON.stringify({error:"username invalid"}));
+                res.status(403).send(JSON.stringify({error:"Invalid username/password"}));
             }
             else{
                 var dbString = result.rows[0].password;
@@ -187,7 +187,7 @@ app.post('/login', function (req, res) {
                     
                     res.send(JSON.stringify({message:"User successfully logged in"}));
                 }else{
-                        res.send(JSON.stringify({error:"Invalid Password"})); 
+                        res.send(JSON.stringify({error:"Incorrect Password"})); 
                 }
             }
 
