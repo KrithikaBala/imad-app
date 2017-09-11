@@ -187,7 +187,7 @@ app.post('/login', function (req, res) {
                     
                     res.send(JSON.stringify({message:"User successfully logged in"}));
                 }else{
-                        res.send(JSON.stringify({error:"Incorrect Password"})); 
+                        res.status(403).send(JSON.stringify({error:"Incorrect Password"})); 
                 }
             }
 
